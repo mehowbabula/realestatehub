@@ -94,9 +94,37 @@ EMAIL_FROM=your-email@gmail.com
 
 # Redis
 REDIS_PASSWORD=your-strong-redis-password
+
+# Sentry Monitoring (recommended for production)
+SENTRY_DSN=https://your-sentry-dsn@sentry.io/project-id
+NEXT_PUBLIC_SENTRY_DSN=https://your-sentry-dsn@sentry.io/project-id
+SENTRY_ORG=your-sentry-org-slug
+SENTRY_PROJECT=your-sentry-project-slug
+SENTRY_AUTH_TOKEN=your-sentry-auth-token
+SENTRY_ENVIRONMENT=production
 ```
 
-### 2.3 Set up SSL certificates
+### 2.3 Set up Sentry monitoring (recommended)
+
+Sentry provides error tracking and performance monitoring for your application.
+
+#### 2.3.1 Create Sentry account
+1. Go to [sentry.io](https://sentry.io) and create a free account
+2. Create a new project and select "Next.js"
+3. Copy your DSN and project details
+
+#### 2.3.2 Update environment variables
+Add your Sentry configuration to the `.env` file:
+```bash
+SENTRY_DSN=https://your-actual-dsn@sentry.io/project-id
+NEXT_PUBLIC_SENTRY_DSN=https://your-actual-dsn@sentry.io/project-id
+SENTRY_ORG=your-org-slug
+SENTRY_PROJECT=your-project-slug
+SENTRY_AUTH_TOKEN=your-auth-token
+SENTRY_ENVIRONMENT=production
+```
+
+### 2.4 Set up SSL certificates
 
 #### Option A: Let's Encrypt (Recommended)
 ```bash
@@ -122,7 +150,7 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -out nginx/ssl/cert.pem
 ```
 
-### 2.4 Deploy the application
+### 2.5 Deploy the application
 ```bash
 chmod +x scripts/deployment/deploy.sh
 ./scripts/deployment/deploy.sh production
@@ -167,7 +195,25 @@ ufw enable
 
 ## Step 4: Monitoring and Maintenance
 
-### 4.1 View logs
+### 4.1 Access monitoring dashboard
+Once deployed, you can access the monitoring features:
+
+```bash
+# Check application health
+curl https://yourdomain.com/api/health
+
+# View monitoring dashboard (admin users only)
+# Navigate to https://yourdomain.com/dashboard and look for monitoring section
+```
+
+### 4.2 Sentry monitoring
+If you set up Sentry, you can:
+- View real-time errors at https://sentry.io
+- Set up alerts for critical issues
+- Monitor performance and user sessions
+- Track releases and deployments
+
+### 4.3 View logs
 ```bash
 # Application logs
 docker-compose logs -f app
@@ -179,7 +225,7 @@ docker-compose logs -f nginx
 docker-compose logs -f postgres
 ```
 
-### 4.2 Backup database
+### 4.4 Backup database
 ```bash
 # Create backup
 docker-compose exec postgres pg_dump -U postgres realestate > backup_$(date +%Y%m%d_%H%M%S).sql
@@ -188,7 +234,7 @@ docker-compose exec postgres pg_dump -U postgres realestate > backup_$(date +%Y%
 docker-compose exec -T postgres psql -U postgres realestate < backup_file.sql
 ```
 
-### 4.3 Update application
+### 4.5 Update application
 ```bash
 # Pull latest changes
 git pull origin main

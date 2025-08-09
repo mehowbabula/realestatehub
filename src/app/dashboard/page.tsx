@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Label } from '@/components/ui/label'
 import { ThemeToggle } from '@/components/theme-toggle'
 import ChatComponent from '@/components/chat/chat-component'
+import MonitoringDashboard from '@/components/monitoring/monitoring-dashboard'
 import { useSession, signOut } from 'next-auth/react'
 import { useEffect } from 'react'
 import { 
@@ -425,11 +426,12 @@ export default function DashboardPage() {
 
         {/* Main Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4 lg:w-auto lg:grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5 lg:w-auto lg:grid-cols-5">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="properties">Properties</TabsTrigger>
             <TabsTrigger value="leads">Leads</TabsTrigger>
             <TabsTrigger value="messages">Messages</TabsTrigger>
+            <TabsTrigger value="monitoring">Monitoring</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
@@ -742,10 +744,9 @@ export default function DashboardPage() {
           <TabsContent value="messages" className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Demo Chat - For testing purposes */}
-              <ChatComponent 
-                conversationId="demo-conversation-1"
-                className="h-[500px]"
-              />
+              <div className="h-[500px]">
+                <ChatComponent />
+              </div>
               
               {/* Instructions */}
               <Card className="bg-white dark:bg-gray-800 border-0 shadow-lg">
@@ -789,6 +790,23 @@ export default function DashboardPage() {
                 </CardContent>
               </Card>
             </div>
+          </TabsContent>
+
+          <TabsContent value="monitoring" className="space-y-6">
+            <Card className="bg-white dark:bg-gray-800 border-0 shadow-lg">
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <Eye className="h-5 w-5" />
+                  <span>System Monitoring</span>
+                </CardTitle>
+                <CardDescription>
+                  Monitor system health, errors, and performance metrics
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <MonitoringDashboard isAdmin={true} />
+              </CardContent>
+            </Card>
           </TabsContent>
         </Tabs>
       </div>
