@@ -59,8 +59,8 @@ su - deploy
 
 ### 2.1 Clone the repository
 ```bash
-git clone https://github.com/yourusername/realestate-platform.git
-cd realestate-platform
+git clone https://github.com/mehowbabula/realestatehub.git
+cd realestatehub
 ```
 
 ### 2.2 Set up environment variables
