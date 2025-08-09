@@ -382,7 +382,7 @@ export default function AgentsPage() {
 
       {/* Agent Profile Dialog */}
       <Dialog open={isProfileOpen} onOpenChange={setIsProfileOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-800">
+        <DialogContent className="max-w-5xl w-[95vw] max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-800">
           {selectedAgent && (
             <div className="space-y-6">
               {/* Header */}
@@ -430,8 +430,8 @@ export default function AgentsPage() {
               </div>
 
               {/* Basic Info */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 min-w-0">
+                <Card className="min-w-0">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Users className="w-5 h-5 text-blue-600" />
@@ -439,26 +439,26 @@ export default function AgentsPage() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <Mail className="w-4 h-4 text-gray-500" />
-                      <span className="text-sm">{selectedAgent.email}</span>
+                    <div className="flex items-start gap-3">
+                      <Mail className="w-4 h-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm break-all min-w-0">{selectedAgent.email}</span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <Phone className="w-4 h-4 text-gray-500" />
+                      <Phone className="w-4 h-4 text-gray-500 flex-shrink-0" />
                       <span className="text-sm">{selectedAgent.phone}</span>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <MapPin className="w-4 h-4 text-gray-500" />
-                      <span className="text-sm">{selectedAgent.location}</span>
+                    <div className="flex items-start gap-3">
+                      <MapPin className="w-4 h-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm break-words min-w-0">{selectedAgent.location}</span>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <Building2 className="w-4 h-4 text-gray-500" />
-                      <span className="text-sm">{selectedAgent.company}</span>
+                    <div className="flex items-start gap-3">
+                      <Building2 className="w-4 h-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm break-words min-w-0">{selectedAgent.company}</span>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="min-w-0">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <TrendingUp className="w-5 h-5 text-green-600" />
@@ -499,7 +499,7 @@ export default function AgentsPage() {
               </div>
 
               {/* Specialties */}
-              <Card>
+              <Card className="min-w-0">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <CheckCircle className="w-5 h-5 text-green-600" />
@@ -518,7 +518,7 @@ export default function AgentsPage() {
               </Card>
 
               {/* Action Buttons */}
-              <div className="flex gap-4 pt-4">
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white">
                   <MessageSquare className="w-4 h-4 mr-2" />
                   Send Message
